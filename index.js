@@ -33,7 +33,8 @@ const propTypes = {
     cancelStyle: View.propTypes.style,
     cancelTextStyle: View.propTypes.style,
     overlayStyle: View.propTypes.style,
-    cancelText: PropTypes.string
+    cancelText: PropTypes.string,
+    resetOnChange: PropTypes.bool
 }
 
 const defaultProps = {
@@ -49,7 +50,8 @@ const defaultProps = {
     cancelStyle: {},
     cancelTextStyle: {},
     overlayStyle: {},
-    cancelText: 'cancel'
+    cancelText: 'cancel',
+    resetOnChange: false
 }
 
 export default class ModalPicker extends BaseComponent {
@@ -80,7 +82,9 @@ export default class ModalPicker extends BaseComponent {
 
     onChange(item) {
         this.props.onChange(item);
-        this.setState({selected: item.label});
+        if(!this.props.resetOnChange) {
+          this.setState({selected: item.label});
+        }
         this.close();
     }
 
